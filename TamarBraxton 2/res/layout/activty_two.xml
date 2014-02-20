@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/silver"
+    android:orientation="vertical" >
+ 
+    <TextView
+        android:id="@+id/header1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/headerTwo"
+         />
+    <TextView
+        android:id="@+id/header2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/headerTwo"
+         />
+      <TextView
+        android:id="@+id/headerOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/headerTwo"
+         />
+
+      <TextView
+        android:id="@+id/headerThree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/headerTwo"
+         />
+      <TextView
+        android:id="@+id/headerFour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/headerTwo"
+         />
+      <TextView
+        android:id="@+id/headerFive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/headerTwo"
+         />
+      <Button 
+        android:id="@+id/webButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:textColor ="#FFFFFF" />
+
+</LinearLayout>

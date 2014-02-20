@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TamarBraxton</string>
+    <string name="action_settings">Settings</string>
+    <string name="header"></string>
+    <string name="editText">Enter a Song</string>
+    <string name="songIdButton">Search</string>
+    <string name="displayAll">Display All</string>
+    <string name="site">Go to Website</string>
+    <string name="album">Album</string>
+    <string name="song">Song</string>
+    <string name="track">Track</string>
+    <string name="headerTwo">Dummy Data</string>
+    <string name="back">Tamar Online</string>
+
+</resources>
