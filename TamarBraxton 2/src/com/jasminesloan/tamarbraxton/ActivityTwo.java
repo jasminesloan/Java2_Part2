@@ -4,11 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.jasminesloan.tamarbraxton.library.JSON;
@@ -16,7 +12,14 @@ import com.jasminesloan.tamarbraxton.library.JSON;
 
 public class ActivityTwo extends Activity{
 	
+	TextView header1, header2, headerOne, headerThree, headerFour, headerFive; 
+	
 	String song;
+	String album;
+	String track;
+	String country;
+	String genre;
+	String release;
 	Context _context;
 	JSON json;
 	
@@ -26,16 +29,23 @@ public class ActivityTwo extends Activity{
         
         Intent intent = getIntent();
         
-        String album = intent.getStringExtra("collectionName");
+        album = intent.getStringExtra("collectionName");
         song = intent.getStringExtra("trackName");
-        String track = intent.getStringExtra("trackNumber");
-        String country = intent.getStringExtra("country");
-        String genre = intent.getStringExtra("primaryGenreName");
-        String release = intent.getStringExtra("releaseDate");
+        track = intent.getStringExtra("trackNumber");
+        country = intent.getStringExtra("country");
+        genre = intent.getStringExtra("primaryGenreName");
+        release = intent.getStringExtra("releaseDate");
+
+        this.setContentView(R.layout.fragment_two);
         
-        this.setContentView(R.layout.activty_two);
-        
-        TextView textview1 = (TextView)findViewById(R.id.header1);
+        FragmentTwo fragment = (FragmentTwo) getFragmentManager().findFragmentById(R.id.fragment2);
+        fragment.displayResults(song, album, track, country, genre, release);
+
+}
+	
+    public void displayResults(String songTitle, String albumName, String songNumber, String country, String genre, String release){
+    	
+    	TextView textview1 = (TextView)findViewById(R.id.header1);
         textview1.setText("Song Title = "  + song);
         textview1.setTypeface(null, Typeface.BOLD);
         
@@ -58,20 +68,8 @@ public class ActivityTwo extends Activity{
         TextView textviewFive = (TextView)findViewById(R.id.headerFive);
         textviewFive.setText("Release Date = "  + release);
         textviewFive.setTypeface(null, Typeface.ITALIC);
-        
-        
-        Button webButton = (Button) findViewById(R.id.webButton);
-        webButton.setOnClickListener(new OnClickListener() {
-    		
-    		@Override
-    		public void onClick(View v) {
-    			// TODO Auto-generated method stub
-    			Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tamarbraxton.com/"));
-                startActivity(browser);
-    		}
-    	});
- 
-}
+    	
+    }
 	
 	public void finish(){
 		Intent info = new Intent();

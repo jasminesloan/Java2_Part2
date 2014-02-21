@@ -54,21 +54,12 @@ public class MainActivity extends Activity {
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.activity_main);
+        this.setContentView(R.layout.fragment_one);
         
         _context = this;
         
         json = JSON.getInstance();
-        Log.i("MAIN", "creating JSON instance");
-        
-        albumMessage = (TextView) this.findViewById(R.id.header);
-        listview = (ListView) this.findViewById(R.id.songList);
-        listview.setTextFilterEnabled(true);
-        
-        Button searchButton = (Button) findViewById(R.id.songIdButton);
-        View songHeader = this.getLayoutInflater().inflate(R.layout.headers, null);
-        listview.addHeaderView(songHeader);
-        
+        Log.i("MAIN", "creating JSON instance");        
 
         
         connected = Network.getConnectionStatus(_context);
@@ -210,8 +201,10 @@ public class MainActivity extends Activity {
 				String genre = songMap.get("primaryGenreName").toString();
 				String release = songMap.get("releaseDate").toString();
 				
-				
-				
+				startResultActivity(songTitle, albumName, songNumber, artistUrl, country, genre, release);
+			}
+			
+			public void startResultActivity(String songTitle, String albumName, String songNumber, String artistUrl, String country, String genre, String release){
 				Intent intent = new Intent(_context, ActivityTwo.class);
 				intent.putExtra("collectionName", albumName);
 				intent.putExtra("trackName", songTitle);
@@ -220,20 +213,15 @@ public class MainActivity extends Activity {
 				intent.putExtra("country", country);
 				intent.putExtra("primaryGenreName", genre);
 				intent.putExtra("releaseDate", release);
-				//intent.setData(Uri.parse(songTitle));
-				
 				
 				startActivityForResult(intent, 0);
 				Log.i("MAIN", "OnItemClick Selected");
+				
 			}
 		});
      
-        }catch (JSONException e) {
-                   // TODO Auto-generated catch block
-                   e.printStackTrace();
-           }
-    
-    
+
+         
    
          Button searchButton = (Button) findViewById(R.id.songIdButton);
          searchButton.setOnClickListener(new OnClickListener() {
@@ -335,8 +323,8 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated method stub
 			displayInfo();
 		}
-	});
-} 
+	}); 
+  
     
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -377,5 +365,9 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+    
+	public void onListItemClicked(String songTitle, String albumName, String songNumber, String artistUrl, String country, String genre, String release) {
+	
+	} 
     
 }
