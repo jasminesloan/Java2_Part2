@@ -183,27 +183,7 @@ public class MainActivity extends Activity {
              albumList.add(displayAlbum);
                } 
         
-        SimpleAdapter albumAdapter = new SimpleAdapter(this, albumList, R.layout.listview, new String[] {"collectionName", "trackName", "trackNumber"}, new int[] {R.id.album, R.id.song, R.id.trackNumber});
-        listview.setAdapter(albumAdapter);
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				// TODO Auto-generated method stub
-				@SuppressWarnings("unchecked")
-				HashMap<String, String> songMap = (HashMap<String, String>)parent.getItemAtPosition(position);
-				
-				String songTitle = songMap.get("trackName").toString();
-				String albumName = songMap.get("collectionName").toString();
-				String songNumber = songMap.get("trackNumber").toString();
-				String artistUrl = songMap.get("artistViewUrl").toString();
-				String country = songMap.get("country").toString();
-				String genre = songMap.get("primaryGenreName").toString();
-				String release = songMap.get("releaseDate").toString();
-				
-				startResultActivity(songTitle, albumName, songNumber, artistUrl, country, genre, release);
-			}
-			
 			public void startResultActivity(String songTitle, String albumName, String songNumber, String artistUrl, String country, String genre, String release){
 				Intent intent = new Intent(_context, ActivityTwo.class);
 				intent.putExtra("collectionName", albumName);
@@ -303,29 +283,8 @@ public class MainActivity extends Activity {
      		}
      	}); 
          
-     		 
-    Button webButton = (Button) findViewById(R.id.siteButton);
-    webButton.setOnClickListener(new OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tamarbraxton.com/"));
-            startActivity(browser);
-		}
-	});
-    
-    Button displayButton = (Button) findViewById(R.id.displayButton);
-    displayButton.setOnClickListener(new OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			displayInfo();
-		}
-	}); 
-  
-    
+   
+         
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub

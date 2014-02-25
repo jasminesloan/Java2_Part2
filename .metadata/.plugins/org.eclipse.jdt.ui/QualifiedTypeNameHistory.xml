@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="android.content.DialogInterface.OnClickListener"/>
+<fullyQualifiedTypeName name="com.jasminesloan.tamarbraxton.MainFragment.FormListener"/>
+<fullyQualifiedTypeName name="android.app.Fragment"/>
+<fullyQualifiedTypeName name="com.jasminesloan.tamarbraxton.R.layout"/>
+<fullyQualifiedTypeName name="android.content.Intent"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="com.jasminesloan.tamarbraxton.FragmentTwo"/>
+<fullyQualifiedTypeName name="com.jasminesloan.tamarbraxton.R.id"/>
+</qualifiedTypeNameHistroy>

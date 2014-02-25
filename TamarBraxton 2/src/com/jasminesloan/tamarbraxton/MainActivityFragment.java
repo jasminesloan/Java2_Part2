@@ -12,11 +12,14 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -81,10 +84,62 @@ public class MainActivityFragment extends Fragment implements OnClickListener {
         searchButton = (Button) view.findViewById(R.id.songIdButton);
         searchButton.setOnClickListener(this);
 		
-		return view;
+        
+        Button webButton = (Button) view.findViewById(R.id.siteButton);
+        webButton.setOnClickListener(new OnClickListener() {
+    		
+    		@Override
+    		public void onClick(View v) {
+    			// TODO Auto-generated method stub
+    			Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tamarbraxton.com/"));
+                startActivity(browser);
+    		}
+        
+    	});
+        
+        Button displayButton = (Button) view.findViewById(R.id.displayButton);
+        displayButton.setOnClickListener(new OnClickListener() {
+    		
+    		@Override
+    		public void onClick(View v) {
+    			// TODO Auto-generated method stub
+    			displayInfo();
+    		}
+       });
+        
+        return view;
 	}
-	
-	
+        
+        
+    		
+    		
+
+			private void displayInfo() {
+				// TODO Auto-generated method stub
+				SimpleAdapter albumAdapter = new SimpleAdapter(getActivity(), albumList, R.layout.listview, new String[] {"collectionName", "trackName", "trackNumber"}, new int[] {R.id.album, R.id.song, R.id.trackNumber});
+		        listview.setAdapter(albumAdapter);
+		        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						// TODO Auto-generated method stub
+						@SuppressWarnings("unchecked")
+						HashMap<String, String> songMap = (HashMap<String, String>)parent.getItemAtPosition(position);
+						
+						String songTitle = songMap.get("trackName").toString();
+						String albumName = songMap.get("collectionName").toString();
+						String songNumber = songMap.get("trackNumber").toString();
+						String artistUrl = songMap.get("artistViewUrl").toString();
+						String country = songMap.get("country").toString();
+						String genre = songMap.get("primaryGenreName").toString();
+						String release = songMap.get("releaseDate").toString();
+					
+						parentActivity(songTitle, albumName, songNumber, artistUrl, country, genre, release);
+					}
+			}
+			}
+    		
+
 	
 
 	@Override
