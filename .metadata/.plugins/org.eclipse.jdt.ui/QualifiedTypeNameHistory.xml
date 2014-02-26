@@ -7,5 +7,10 @@
 <fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
 <fullyQualifiedTypeName name="com.jasminesloan.tamarbraxton.FragmentTwo"/>
+<fullyQualifiedTypeName name="android.widget.AdapterView"/>
+<fullyQualifiedTypeName name="org.json.JSONException"/>
+<fullyQualifiedTypeName name="org.json.JSONObject"/>
+<fullyQualifiedTypeName name="com.jasminesloan.tamarbraxton.MainActivityFragment.onListItemClicked"/>
 <fullyQualifiedTypeName name="com.jasminesloan.tamarbraxton.R.id"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
 </qualifiedTypeNameHistroy>

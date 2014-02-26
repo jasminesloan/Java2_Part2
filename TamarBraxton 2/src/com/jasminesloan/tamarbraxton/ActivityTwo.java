@@ -45,7 +45,7 @@ public class ActivityTwo extends Activity{
 	
     public void displayResults(String songTitle, String albumName, String songNumber, String country, String genre, String release){
     	
-    	TextView textview1 = (TextView)findViewById(R.id.header1);
+  /**  	TextView textview1 = (TextView)findViewById(R.id.header1);
         textview1.setText("Song Title = "  + song);
         textview1.setTypeface(null, Typeface.BOLD);
         
@@ -67,7 +67,7 @@ public class ActivityTwo extends Activity{
         
         TextView textviewFive = (TextView)findViewById(R.id.headerFive);
         textviewFive.setText("Release Date = "  + release);
-        textviewFive.setTypeface(null, Typeface.ITALIC);
+        textviewFive.setTypeface(null, Typeface.ITALIC);**/
     	
     }
 	

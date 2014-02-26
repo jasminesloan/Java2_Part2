@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.jasminesloan.tamarbraxton.library.JSON;
 
@@ -15,6 +17,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -83,6 +86,8 @@ public class MainActivityFragment extends Fragment implements OnClickListener {
         
         searchButton = (Button) view.findViewById(R.id.songIdButton);
         searchButton.setOnClickListener(this);
+        
+        
 		
         
         Button webButton = (Button) view.findViewById(R.id.siteButton);
@@ -110,12 +115,89 @@ public class MainActivityFragment extends Fragment implements OnClickListener {
         return view;
 	}
         
-        
-    		
-    		
-
-			private void displayInfo() {
+	public void displayInfo() {
 				// TODO Auto-generated method stub
+		JSON.getInstance();
+        String JSONString = JSON.readStringFile(getActivity(), "tamar.txt");
+      
+      
+        HashMap<String, String> displayAlbum;
+
+        JSONObject object = null;
+        JSONArray records = null;
+
+        try {
+       	 object = new JSONObject(JSONString);   
+       	 records = object.getJSONArray("results");
+ 
+       	 int count = object.getInt("resultCount");
+
+       	 albumMessage.setText("There are " + count + " songs");
+
+       	 for(int i = 0; i < count; i++){
+            
+            JSONObject recordObject = records.getJSONObject(i);
+            String album;
+            String track;
+            String trackNumber;
+            String artistView;
+            String country;
+            String genre;
+            String release;
+            
+            try {
+                    album = recordObject.getString("collectionName");
+            } catch (Exception e) {
+                    album = "unknown";
+            }
+            try {
+                    track = recordObject.getString("trackName");
+            } catch (Exception e) {
+                    track = "unknown";
+            }
+            try {
+                    trackNumber = recordObject.getString("trackNumber");
+            } catch (Exception e){
+                    trackNumber = "unknown";
+            }
+            try {
+           	 artistView = recordObject.getString("artistViewUrl");
+            } catch (Exception e){
+       	 artistView = "unknown";
+        	} 
+            try {
+        		country = recordObject.getString("country");
+        	} catch (Exception e){
+        		country = "unknown";
+        	}
+            try {
+           	 genre = recordObject.getString("primaryGenreName");
+         	} catch (Exception e){
+         		genre = "unknown";
+         	}
+            try {
+           	 release = recordObject.getString("releaseDate");
+        	} catch (Exception e){
+        		release = "unknown";
+        	}
+
+
+            displayAlbum = new HashMap<String, String>();
+            displayAlbum.put("collectionName", album);
+            displayAlbum.put("trackName", track);
+            displayAlbum.put("trackNumber", trackNumber);
+            displayAlbum.put("artistViewUrl", artistView);
+            displayAlbum.put("country", country);
+            displayAlbum.put("primaryGenreName", genre);
+            displayAlbum.put("releaseDate", release);
+
+            albumList.add(displayAlbum);
+              } 
+        }catch (Exception e) {
+  				// TODO Auto-generated catch block
+  				e.printStackTrace();
+  			}
+		
 				SimpleAdapter albumAdapter = new SimpleAdapter(getActivity(), albumList, R.layout.listview, new String[] {"collectionName", "trackName", "trackNumber"}, new int[] {R.id.album, R.id.song, R.id.trackNumber});
 		        listview.setAdapter(albumAdapter);
 		        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -134,18 +216,89 @@ public class MainActivityFragment extends Fragment implements OnClickListener {
 						String genre = songMap.get("primaryGenreName").toString();
 						String release = songMap.get("releaseDate").toString();
 					
-						parentActivity(songTitle, albumName, songNumber, artistUrl, country, genre, release);
+						parentActivity.onListItemClicked(songTitle, albumName, songNumber, artistUrl, country, genre, release);
 					}
-			}
-			}
+			}); 
+		}
     		
-
+		public void getFragmentData(){
+			displayInfo();
+		}
 	
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
+			searchField = (EditText) v.findViewById(R.id.editText);
+			listview.setTextFilterEnabled(true);
+			Log.e("MAIN FRAG", searchField.getText().toString());
+			listview.setFilterText(searchField.getText().toString());
+			
+			if(resultsArray != null && !searchField.getText().equals(""))
+			{
+				String enteredText = searchField.getText().toString();
+				JSONArray completeArray = new JSONArray();
+				
+				for(int i = 0; i < resultsArray.length(); i++)
+				{
+					try{
+						JSONObject trackNumberObject = resultsArray.getJSONObject(i);
+						if(trackNumberObject.get("trackNumber").toString().equalsIgnoreCase(enteredText))
+						{
+							completeArray.put(trackNumberObject);     						
+							}
+						}
+				catch (JSONException e)
+				{
+					e.printStackTrace();
+				}
+			}
 		
+		if(completeArray.length() > 0)
+		{
+			for(int i = 0; i < resultsArray.length(); i++)
+			{
+				try {
+				JSONObject trackNumberObject = resultsArray.getJSONObject(i);
+				String album;
+	            String track;
+	            String trackNumber;
+	             
+	             try {
+	            	  album = trackNumberObject.getString("collectionName");
+             } catch (Exception e) {
+                     album = "unknown";
+             }
+             try {
+                     track = trackNumberObject.getString("trackName");
+             } catch (Exception e) {
+                     track = "unknown";
+             }
+             try {
+                     trackNumber = trackNumberObject.getString("trackNumber");
+             } catch (Exception e){
+                     trackNumber = "unknown";
+             }
+	          
+             HashMap<String, String> extraMap = new HashMap<String, String>();
+             
+             extraMap.put("collectionName", album);
+             extraMap.put("trackName", track);
+             extraMap.put("trackNumber", trackNumber);
+             
+             albumList.add(extraMap);
+             
+             adapter = new SimpleAdapter(_context, albumList, R.layout.listview, new String[] {"collectionName", "trackName", "trackNumber"}, new int[] {R.id.album, R.id.song, R.id.trackNumber});
+             listview.setAdapter(adapter);
+             
+
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			}
+		}
 	}
 
+	}
 }
