@@ -1,7 +1,0 @@
-package com.jasminesloan.tamarbraxton;
-
-import android.app.Fragment;
-
-public class FragmentTwo extends Fragment {
-
-}

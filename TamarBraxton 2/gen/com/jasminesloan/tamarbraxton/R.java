@@ -73,6 +73,7 @@ public final class R {
         public static final int fragment_two=0x7f030004;
         public static final int headers=0x7f030005;
         public static final int listview=0x7f030006;
+        public static final int search_dialog_fragment=0x7f030007;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -86,6 +87,7 @@ public final class R {
         public static final int editText=0x7f050003;
         public static final int header=0x7f050002;
         public static final int headerTwo=0x7f05000a;
+        public static final int searchButtonDialog=0x7f05000c;
         public static final int site=0x7f050006;
         public static final int song=0x7f050008;
         public static final int songIdButton=0x7f050004;

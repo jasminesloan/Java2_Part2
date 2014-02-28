@@ -261,4 +261,8 @@ public class MainActivity extends Activity implements MainActivityFragment.onLis
 		
 	} 
     
+	public void dialogSearch(){
+		SearchFragment fragmentTwo = SearchFragment.newInstance();
+		fragmentTwo.show(getFragmentManager(), "dialog");
+	}
 }

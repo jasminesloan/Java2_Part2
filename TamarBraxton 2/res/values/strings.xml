@@ -13,5 +13,6 @@
     <string name="track">Track</string>
     <string name="headerTwo">Dummy Data</string>
     <string name="back">Tamar Online</string>
+    <string name="searchButtonDialog"></string>
 
 </resources>
